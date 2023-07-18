@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  mysql:
+    image: mysql:5.7
+    volumes_from:
+      - data_database
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_USER: user_default
+      MYSQL_PASSWORD: pass_default
+
+  data_database:
+    image: cogniteev/echo
+    command: echo 'Data Container for MySql'
+    volumes:
+      - /var/lib/mysql
